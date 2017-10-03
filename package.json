@@ -1,0 +1,14 @@
+{
+  "name": "kata_docker",
+  "version": "1.0.0",
+  "description": "Kata Docker",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Florent DESPIERRES <florent@despierres.pro",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
