@@ -1,14 +1,11 @@
 {
   "name": "kata_docker",
   "version": "1.0.0",
-  "description": "Kata Docker",
+  "description": "Learn how to create a simple docker-compose file with 3 services.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
-  "author": "Florent DESPIERRES <florent@despierres.pro",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.16.1"
-  }
+  "author": "Florent DESPIERRES <florent@despierres.pro>",
+  "license": "MIT"
 }
