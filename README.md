@@ -1,45 +1,56 @@
 Kata Docker
 ===========
+> Learn how to create a simple stack (Database + DB Admin tool + Applicative Server) with docker-compose file.
 
-Créer un fichier **docker-compose.yml** pour notre projet.
+Instructions
+------------
 
-## Description
+* Make sure you have already installed both [Docker Engine] and [Docker Compose]. You don’t need to install [NodeJS], it is provided by Docker images
 
-Notre application va être composer de 3 services :
-- une base NoSQL **MongoDB**
-- une application de visualisation **Mongo Express**
-- un serveur **NodeJS**
+* Clone this repository
 
-## Instructions
+* Create a docker-compose.yml file to the root of our project
 
-1) Ajouter un service **db** 
-- Image: [Mongo](https://hub.docker.com/_/mongo/)
-- Port exposé: 27018
-- Volume: aucun
-- Variable environnement: aucune
+* Create a service **app** :
+    - Image: [node:8.9]
+    - Port: 3000
+    - Volume: **current folder** to **/app**
+    - Environment: **NODE_ENV**
+    - Working dir: **/app**
+    - User: **node**
+    - Command: **npm start**
 
-2) Ajouter un Service **dbv**
-- Image: [Mongo-express](https://hub.docker.com/_/mongo-express/)
-- Port exposé: 8081
-- Variable environnement: **ME_CONFIG_MONGODB_SERVER** et **ME_CONFIG_MONGODB_PORT**
-- Volume: aucun
+* Create a service **db** :
+    - Image: [MongoDB]
+    - Port: 27018
 
-3) Ajouter un service **app**
-- Image: [node:8.6](https://hub.docker.com/_/node/)
-- Port exposé: 3000
-- Volume: **répertoire courant** vers **/app**
-- Variable environnement: **NODE_ENV**
-
-4) Ajouter un fichier **.dockerignore** :
-- node_modules
-
-5) Vérifier dans le projet qu'il y a bien un fichier **package.json** et que le [script de démarrage](https://docs.npmjs.com/misc/scripts#default-values) est bien configuré. 
+* Create a service **dbv** :
+    - Image: [Mongo-express]
+    - Port: 8081
+    - Environment: **ME_CONFIG_MONGODB_SERVER** and **ME_CONFIG_MONGODB_PORT**
+    - Depends on: **db**
 
 
-## Execution
+* Verify that the **package.json** file contains a [startup script]
+
+
+# Execution
 
 ```bash
-$ npm install
-$ npm start
+$ docker-compose up
 ```
-Aller à l'url [http://localhost:3000](http://localhost:3000)
+
+# Help
+
+* https://docs.docker.com/compose/compose-file/#service-configuration-reference
+* https://github.com/nodejs/docker-node/blob/master/README.md#how-to-use-this-image
+* https://nodejs.org/dist/latest-v8.x/docs/api/
+
+
+[startup script]: https://docs.npmjs.com/misc/scripts#default-values
+[Docker Engine]: https://docs.docker.com/engine/installation/
+[Docker Compose]: https://docs.docker.com/compose/install/
+[MongoDB]: https://hub.docker.com/_/mongo/
+[Mongo-express]: https://hub.docker.com/_/mongo-express/
+[node:8.9]: https://hub.docker.com/_/node/
+[NodeJS]: https://nodejs.org
